@@ -72,7 +72,8 @@ end
 
 montcode = fopen('code.txt','wt');
 for p=1:x
-  fprintf(montcode,'%i%c ',code(p,:));
+  fprintf(montcode,'%i',code(p,1));
+  fprintf(montcode,'%c',code(p,2));
   %fprintf(montcode,'%i %c \n',code(p,:));
 end
 fclose(montcode);
@@ -90,51 +91,6 @@ for p=1:x
 end
 fclose(montdicionario);
 
-
-dicionario((1:x),:);
-code;
-P=1;
-
-
-%decodificaçao 
-
-%code2=fopen('code.txt');
-%tex = fopen('teste.txt');
-%%%code3= fscanf(code2, '%i %c');
-%fclose(code2);
-%[h,j]=size(code3);
-%for i=1:(h+h-1)
-%  if (mod(i,2)==1)
-%    code4(((i+1)/2),1)=code3(i,1);
-%  else
-%    code4(((i)/2),1)=code3(i,1);
-%  end
-%end
-%code4
-
-
-
-
-for l=1:x
-  if (code(l,1)==0)
-    decode(1,P)=code(l,2);
-    P++;
-  else
-    for k=2:(dictam)
-      if ((dicionario((code(l,1)),k))~=0)
-        decode(1,P)=dicionario((code(l,1)),k);
-        P++;
-      end 
-    end
-    decode(1,P)=code(l,2);
-    P++;
-  end
-end 
-
-
-  montdecode = fopen('decode.txt','wt');
-  fprintf(montdecode,'%c',decode);
-  fclose(montdecode);
 
 
 fclose(tex);
