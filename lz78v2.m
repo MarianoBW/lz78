@@ -35,12 +35,9 @@ for i=1:fim
         dictam++;
         dicionario(1,dictam)=zeros;
       end
-      
 
-      
       if i==fim
         dicionario(x,:)=[];
-        %dicionario(x,y)=0;
       else
         dicionario(x,1)=x;
         dicionario(x,y)=(texto(1,i));
@@ -52,6 +49,7 @@ for i=1:fim
     end
     
     if ((j==x)&&(jatem==0))
+      
       dicionario(x,1)=x;
       dicionario(x,y)=(texto(1,i));
       if (y==2)
@@ -61,6 +59,10 @@ for i=1:fim
       x++; 
       y=2;
       
+      if i==fim
+        x--;
+      end
+      
     end
   
   end
@@ -68,63 +70,72 @@ for i=1:fim
   
 end  
 
-%dicionario = [dic1((1:x),1),dic1((1:x),(3:dictam))] % monta o dicionario
-%code = [dic1((1:x),2),dic1((1:x),3)];
+montcode = fopen('code.txt','wt');
+for p=1:x
+  fprintf(montcode,'%i%c ',code(p,:));
+  %fprintf(montcode,'%i %c \n',code(p,:));
+end
+fclose(montcode);
+
+montdicionario = fopen('dicionario.txt','wt');
+for p=1:x
+  for g=1:dictam
+    if g==1
+      fprintf(montdicionario,'%i ',dicionario(p,g));
+    elseif (dicionario(p,g)~=0)
+      fprintf(montdicionario,'%c',dicionario(p,g));
+    end
+  end  
+  fprintf(montdicionario,'\n');
+end
+fclose(montdicionario);
 
 
-%for h=1:x  %organiza o codigo de saida 
-%  for (cod=1:(dictam-3))
-%    if (dic1(h,(cod+3)) ~= 0)
-%      code(h,2) = dic1(h,(3+cod));
-%    end
+dicionario((1:x),:);
+code;
+P=1;
+
+
+%decodificaçao 
+
+%code2=fopen('code.txt');
+%tex = fopen('teste.txt');
+%%%code3= fscanf(code2, '%i %c');
+%fclose(code2);
+%[h,j]=size(code3);
+%for i=1:(h+h-1)
+%  if (mod(i,2)==1)
+%    code4(((i+1)/2),1)=code3(i,1);
+%  else
+%    code4(((i)/2),1)=code3(i,1);
 %  end
 %end
-
-
-
-%l1(1:fim)=1;
-%l2(1:fim)=1;
-%l3=fim
-%for g=1:dictam
-%  for p=1:fim
-%  y=code(p,1);
-%  z=code(p,2);
-%    for l=1:x
-%      if (texto(1:,(p:(p+(dictam-2-g))))==dicionario(l,(2:(dictam-2-g))))
-%        code(l,1)=dicionario(l,1);
-
-
-
-%    if (y~=0)
-%      codefim(1,l)=y;
-%      l++;
-%    end
-%    if (z~=0)
-%      for q=1:x
-%        if (z==dic)
-%          codefim(1,l)=x;
-%          l++;
-%        end
-%      end
-%    end
-%  end
-%end
-
-dicionario((1:x),:)
-code
-
-
-%decode
-
-%for 
+%code4
 
 
 
 
+for l=1:x
+  if (code(l,1)==0)
+    decode(1,P)=code(l,2);
+    P++;
+  else
+    for k=2:(dictam)
+      if ((dicionario((code(l,1)),k))~=0)
+        decode(1,P)=dicionario((code(l,1)),k);
+        P++;
+      end 
+    end
+    decode(1,P)=code(l,2);
+    P++;
+  end
+end 
 
-%fprintf('%c ',dic1(:,2) ,' %c ',dic1(:,(3:dictam))); %c %c \n',dic1(:,:))
-%fprintf('%c \n',code)
-%fprintf(dic);
+
+  montdecode = fopen('decode.txt','wt');
+  fprintf(montdecode,'%c',decode);
+  fclose(montdecode);
+
 
 fclose(tex);
 
