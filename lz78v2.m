@@ -10,14 +10,17 @@
 clear all;
 close all;
 
+
 tex = fopen('teste.txt');
 texto= fscanf(tex, '%c');
+
+texto=double(texto);
 
 [ini,fim]=size(texto);
 
 x=1;
 dictam=2;
-dicionario(fim,dictam)=zeros;
+dicionario(4,dictam)=zeros;
 jatem=0;
 espera=0;
 y=2;
@@ -27,31 +30,34 @@ for i=1:fim
   jatem=0;
   
   for j=1:x
-  
-    if ((dicionario(j,(2:y))) == (texto(1,((i-y+2):i)))) 
-      
-      jatem=1;
-      if (dictam==y)
-        dictam++;
-        dicionario(1,dictam)=zeros;
-      end
-
-      if i==fim
-        dicionario(x,:)=[];
-      else
-        dicionario(x,1)=x;
-        dicionario(x,y)=(texto(1,i));
-      end
-      code(x,1)=j;
-      
-      y++;
-      
-    end
+    dicionario(x,1)=x;
+    %if (dicionario(j,y)~=0)
     
+      if ((dicionario(j,(2:y))) == (texto(1,((i-y+2):i)))) 
+      
+        jatem=1;
+        if (dictam==y)
+          dictam++;
+          dicionario(1,dictam)=zeros;
+        end
+
+        if i==fim
+          dicionario(x,:)=[];
+        else
+          dicionario(x,1)=x;
+          dicionario(x,(2:y))=(texto(1,(i-y+2):i));
+        end
+        code(x,1)=j;
+      
+        y++;
+        
+      end
+    %end
     if ((j==x)&&(jatem==0))
       
       dicionario(x,1)=x;
-      dicionario(x,y)=(texto(1,i));
+      %dicionario(x,y)=(texto(1,i));
+      dicionario(x,(2:y))=(texto(1,(i-y+2):i));
       if (y==2)
         code(x,1)=0;
       end
@@ -73,7 +79,7 @@ end
 montcode = fopen('code.txt','wt');
 for p=1:x
   fprintf(montcode,'%i',code(p,1));
-  fprintf(montcode,'%c',code(p,2));
+  fprintf(montcode,'%c\n',code(p,2));
   %fprintf(montcode,'%i %c \n',code(p,:));
 end
 fclose(montcode);

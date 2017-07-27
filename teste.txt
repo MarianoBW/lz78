@@ -1,5 +1,24 @@
-Mariano 
-Berwanger Wille,
-22 anos,
-1/08/1995
-paralelepidedo
+MINISTERIO DA EDUCACAO
+UNIVERSIDADE FEDERAL DE PELOTAS
+CENTRO DE ENGENHARIAS
+
+TRABALHO DE SISTEMA DE COMUNICACAO II
+
+1. OBJETIVO
+Pesquisar e Programar um compactador e decompactador de texto tipo
+Lempel-Ziv.
+Obs1: O trabalho devera ser executado individualmente. As copias ou
+indicios de plagio, se detectadas, receberao nota zero.
+
+2. ENTREGA DO TRABALHO
+ Devera ser feito um relatorio contendo o principio de funcionamento do
+algoritmo Lempel-Ziv, exemplos de onde se e utilizado, codigo fonte e testes
+realizados.
+
+3. PRAZO PARA A REALIZACAO DO TRABALHO
+ O trabalho devera ser entregue ate o dia 15/08/2018 (ultima semana antes da
+ultima prova) nao serao aceitos trabalhos entregues apos essa data.
+
+4. CONSIDERACOES FINAIS
+ O aluno podera contar com o auxilio do professor ate o dia 01/08/2015 (duas
+semana antes da entrega do trabalho) para duvidas a respeito do trabalho.
