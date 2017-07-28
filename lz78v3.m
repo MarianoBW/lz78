@@ -1,10 +1,10 @@
-% 
-% LZ78
-%
-% Mariano Berwanger Wille
-%
 
-clear all; %
+% LZ78
+
+% Mariano Berwanger Wille
+
+
+clear all; 
 close all;
 
 %importando texto
@@ -12,38 +12,38 @@ tex = fopen('teste.txt');
 texto= fscanf(tex, '%c');
 %verifica tamanho do texto
 [ini,fim]=size(texto);
-
-%declaraçao de variaveis internas
+fclose(tex);
+%declaracao de variaveis internas
 
 x=1;         % tamanho inicial de linhas do codigo 
 dictam=2;    % tamanho inicial de colunas do dicionario
 dicionario(4,dictam)=zeros; % tamanho inicial do dicionario
-jatem=0;     % flag de repetiçao zerada  
+jatem=0;     % flag de repeticao zerada  
 y=2;         % contador de colunas necessarias no dicionario no momento
 code=zeros;  % codigo zerado 
 h=1;         % nova linha necessaria 
 
-for i=1:fim  % realiza varedura no texto
+for i=1:fim  % realiza varredura no texto
   if jatem==1 % verifica se uma nova coluna e necessaria
     y++;
   end  
   jatem=0; 
   x=h;       % verifica se uma nova linha e necessaria
-  for j=1:x  % realiza varedura no dicionario
+  for j=1:x  % realiza varredura no dicionario
     dicionario(x,1)=x; % adiciona linha se necessario
     
       if (((dicionario(j,(2:y))) == (texto(1,((i-y+2):i))))&&(jatem==0)) % copara texto com dicionario
         
-        code(x,1)=j; % coloca a lina de repetiçao na primeira coluna do codigo 
+        code(x,1)=j; % coloca a linha de repeticao na primeira coluna do codigo 
         
         if (dictam<=y) % adiciona nova coluna se necessario
           dictam++;
           dicionario(1,dictam)=zeros;
         end
-        jatem=1;  % flag indicando repetiçao 
+        jatem=1;  % flag indicando repeticao 
         dicionario(x,(2:(y)))=dicionario(j,(2:(y))); % copia valores repetidos do dicionario
         
-      elseif((j==x)&&(jatem==0)) %verifica se a varedura esta completa 
+      elseif((j==x)&&(jatem==0)) %verifica se a varredura esta completa 
         dicionario(x,1)=x;    % adiciona linha se necessario
         dicionario(x,y)=(texto(1,i)); % adiciona caracter novo ao dicionario
         y=2;                  % "zera" contador de colunas 
@@ -52,7 +52,7 @@ for i=1:fim  % realiza varedura no texto
         
       end
   end
-  if i==fim  %verifica se a varedura esta completa 
+  if i==fim  %verifica se a varredura esta completa 
     x--;     % nova linha nao mais necessaria
   end
   
@@ -79,19 +79,3 @@ for p=1:x+1
   fprintf(montdicionario,'\n');
 end
 fclose(montdicionario);
-
-
-
-fclose(tex);
-
-
-
-
-
-
-
-
-
-
-
-
